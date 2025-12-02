@@ -1,40 +1,22 @@
-// @ts-check
-// `@type` JSDoc annotations allow editor autocompletion and type checking
-// (when paired with `@ts-check`).
-// There are various equivalent ways to declare your Docusaurus config.
-// See: https://docusaurus.io/docs/api/docusaurus-config
-
-import {themes as prismThemes} from 'prism-react-renderer';
-
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
+const {themes} = require('prism-react-renderer');
+const lightCodeTheme = themes.github;
+const darkCodeTheme = themes.vsDark;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: 'Arc Flash Studio',
+  tagline: 'Professional Arc Flash Analysis • IEEE 1584-2018 Compliant',
   favicon: 'img/favicon.ico',
 
-  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
-  future: {
-    v4: true, // Improve compatibility with the upcoming Docusaurus v4
-  },
-
-  // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
-
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  url: 'https://your-username.github.io',
+  baseUrl: '/arc-flash-studio/',
+  
+  organizationName: 'your-github-username',
+  projectName: 'arc-flash-studio',
 
   onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -46,29 +28,16 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: './sidebars.js',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          sidebarPath: require.resolve('./sidebars.js'),
+          editUrl: 'https://github.com/your-username/arc-flash-studio/tree/main/docs-site/',
         },
         blog: {
           showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
+          blogTitle: 'Development Blog',
+          blogDescription: 'Building Arc Flash Studio in public',
         },
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: require.resolve('./src/css/custom.css'),
         },
       }),
     ],
@@ -77,41 +46,84 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
-      colorMode: {
-        respectPrefersColorScheme: true,
+      // Announcement bar for important updates
+      announcementBar: {
+        id: 'support_us',
+        content:
+          '⭐️ If you find this project useful, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/your-username/arc-flash-studio">GitHub</a>!',
+        backgroundColor: '#2563eb',
+        textColor: '#ffffff',
+        isCloseable: true,
       },
+      
+      // Navbar configuration
       navbar: {
-        title: 'My Site',
+        title: 'Arc Flash Studio',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'Arc Flash Studio',
           src: 'img/logo.svg',
         },
+        hideOnScroll: true,
         items: [
           {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Docs',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
-            label: 'GitHub',
+            to: '/blog', 
+            label: 'Blog', 
+            position: 'left'
+          },
+          {
+            type: 'search',
             position: 'right',
+          },
+          {
+            href: 'https://github.com/your-username/arc-flash-studio',
+            position: 'right',
+            className: 'header-github-link',
+            'aria-label': 'GitHub repository',
           },
         ],
       },
+      
+      // Footer configuration
       footer: {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Documentation',
             items: [
               {
-                label: 'Tutorial',
+                label: 'Getting Started',
                 to: '/docs/intro',
+              },
+              {
+                label: 'API Reference',
+                to: '/docs/intro',
+              },
+              {
+                label: 'Examples',
+                to: '/docs/intro',
+              },
+            ],
+          },
+          {
+            title: 'Standards',
+            items: [
+              {
+                label: 'IEEE 1584-2018',
+                href: 'https://standards.ieee.org/standard/1584-2018.html',
+              },
+              {
+                label: 'NFPA 70E',
+                href: 'https://www.nfpa.org/70E',
+              },
+              {
+                label: 'NEC',
+                href: 'https://www.nfpa.org/70',
               },
             ],
           },
@@ -119,40 +131,48 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'X',
-                href: 'https://x.com/docusaurus',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/your-username/arc-flash-studio',
+              },
+              {
+                label: 'Issues',
+                href: 'https://github.com/your-username/arc-flash-studio/issues',
+              },
+              {
+                label: 'Discussions',
+                href: 'https://github.com/your-username/arc-flash-studio/discussions',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `
+          <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="margin: 0;">Built with ⚡ by electrical engineers, for electrical engineers</p>
+            <p style="margin: 0.5rem 0 0 0; opacity: 0.6;">Copyright © ${new Date().getFullYear()} Arc Flash Studio • MIT Licensed</p>
+          </div>
+        `,
       },
+      
+      // Code theme
       prism: {
-        theme: prismThemes.github,
-        darkTheme: prismThemes.dracula,
+        theme: lightCodeTheme,
+        darkTheme: darkCodeTheme,
+        additionalLanguages: ['python', 'bash', 'json'],
       },
+      
+      // Color mode
+      colorMode: {
+        defaultMode: 'light',
+        disableSwitch: false,
+        respectPrefersColorScheme: true,
+      },
+      
+      // Metadata
+      metadata: [
+        {name: 'keywords', content: 'arc flash, IEEE 1584, electrical safety, power systems, NFPA 70E'},
+        {name: 'description', content: 'Open-source arc flash calculator compliant with IEEE 1584-2018'},
+      ],
     }),
 };
 
-export default config;
+module.exports = config;

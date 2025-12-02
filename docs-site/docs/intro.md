@@ -2,46 +2,94 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Introduction
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Welcome to **Arc Flash Studio** - a modern, open-source arc flash calculator built for electrical engineers.
+
+## What is Arc Flash?
+
+An arc flash is an explosive release of energy caused by an electric arc. The incident energy can cause severe burns and injuries. OSHA and NFPA 70E require arc flash analysis for electrical systems.
+
+## Why Arc Flash Studio?
+
+### 🎯 IEEE 1584-2018 Compliant
+Full implementation of the latest IEEE standard for arc flash calculations, including all correction factors and equipment configurations.
+
+### 🌐 Web-Based & Modern
+No software installation required. Works on any device with a web browser. Clean, intuitive interface.
+
+### 🔓 Open Source & Transparent
+- See exactly how calculations are performed
+- Validate against your own test cases
+- Contribute improvements
+- No vendor lock-in
+
+### ⚡ Fast & Accurate
+- Real-time validation
+- Instant calculations
+- Results you can trust
+
+## Key Features
+
+- **Equipment Library**: Pre-configured common equipment
+- **Multi-Equipment Systems**: Analyze entire facilities
+- **Report Generation**: Professional PDF reports and arc flash labels
+- **Project Management**: Save and organize your work
+- **API Access**: Integrate with other tools
+
+## Who Should Use This?
+
+- Electrical engineers performing arc flash studies
+- Facility managers ensuring workplace safety
+- Students learning power systems analysis
+- Researchers validating calculation methods
+
+## Standards Compliance
+
+Arc Flash Studio implements:
+- **IEEE 1584-2018**: Guide for Performing Arc-Flash Hazard Calculations
+- **NFPA 70E**: Standard for Electrical Safety in the Workplace
+- **NEC Article 110.16**: Flash Protection requirements
+
+## Quick Example
+```json
+// Simple API request
+POST /api/v1/calculate
+{
+  "equipment": {
+    "voltage": 480,
+    "bolted_fault_current": 40000,
+    "working_distance": 24,
+    "enclosure_type": "VCB"
+  }
+}
+
+// Response
+{
+  "incident_energy": 8.24,  // cal/cm²
+  "ppe_category": 2,
+  "arc_flash_boundary": 48  // inches
+}
+```
+
+## Architecture
+
+Arc Flash Studio uses a modern three-tier architecture:
+
+![System Architecture](/img/system-architecture.svg)
+
+- **Frontend**: React-based web interface
+- **Backend**: FastAPI with PandaPower integration
+- **Calculation Engine**: Pure Python implementation of IEEE 1584-2018
 
 ## Getting Started
 
-Get started by **creating a new site**.
+Ready to dive in? Check out our [Quick Start Guide](./getting-started/installation.md).
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## Open Source
 
-### What you'll need
+This project is MIT licensed and welcomes contributions. See our [Contributing Guide](./contributing/overview.md).
 
-- [Node.js](https://nodejs.org/en/download/) version 20.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
-
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+:::warning Safety Disclaimer
+Arc Flash Studio is for educational and reference purposes. Always consult with qualified electrical engineers for safety-critical calculations. The authors assume no liability for use of this software.
+:::

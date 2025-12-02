@@ -1,30 +1,680 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Arc Flash Studio - Ultra-Minimal Design System
+ * Inspired by: Next.js, Vercel, Linear, Raycast
  */
 
-/* You can override the default Infima variables here. */
-:root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-}
-
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-}
+/* ============================================
+   MINIMAL COLOR SYSTEM
+   ============================================ */
+   :root {
+    /* Neutral Palette - Ultra subtle */
+    --gray-50: #fafafa;
+    --gray-100: #f5f5f5;
+    --gray-200: #e5e5e5;
+    --gray-300: #d4d4d4;
+    --gray-400: #a3a3a3;
+    --gray-500: #737373;
+    --gray-600: #525252;
+    --gray-700: #404040;
+    --gray-800: #262626;
+    --gray-900: #171717;
+    
+    /* Accent - Minimal blue */
+    --accent: #0070f3;
+    --accent-light: #3291ff;
+    --accent-dark: #0761d1;
+    
+    /* Semantic */
+    --success: #00d9a5;
+    --warning: #f5a623;
+    --danger: #ff4747;
+    
+    /* Theme Colors */
+    --ifm-color-primary: var(--accent);
+    --ifm-color-primary-dark: var(--accent-dark);
+    --ifm-color-primary-darker: #0051a3;
+    --ifm-color-primary-darkest: #004085;
+    --ifm-color-primary-light: var(--accent-light);
+    --ifm-color-primary-lighter: #66b3ff;
+    --ifm-color-primary-lightest: #b3d9ff;
+    
+    /* Backgrounds */
+    --ifm-background-color: #ffffff;
+    --ifm-background-surface-color: var(--gray-50);
+    
+    /* Text */
+    --ifm-font-color-base: var(--gray-900);
+    --ifm-font-color-secondary: var(--gray-600);
+    --ifm-font-color-tertiary: var(--gray-400);
+    
+    /* Code */
+    --ifm-code-font-size: 0.875rem;
+    --ifm-code-background: var(--gray-100);
+    --ifm-code-color: var(--gray-800);
+    
+    /* Borders - Barely visible */
+    --border-color: var(--gray-200);
+    --ifm-global-border-width: 1px;
+    
+    /* Spacing - Generous */
+    --ifm-global-spacing: 1.5rem;
+    
+    /* Radius - Subtle */
+    --ifm-global-radius: 0.5rem;
+    
+    /* Shadows - Very subtle */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+    
+    /* Typography - System fonts */
+    --ifm-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+    --ifm-font-family-monospace: ui-monospace, 'SF Mono', 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, 'Courier New', monospace;
+    
+    --ifm-font-size-base: 16px;
+    --ifm-line-height-base: 1.65;
+    --ifm-heading-font-weight: 600;
+    --ifm-font-weight-semibold: 500;
+    --ifm-font-weight-bold: 600;
+  }
+  
+  /* ============================================
+     DARK MODE - High Contrast Minimal
+     ============================================ */
+  [data-theme='dark'] {
+    --ifm-background-color: #000000;
+    --ifm-background-surface-color: var(--gray-900);
+    
+    --ifm-font-color-base: var(--gray-50);
+    --ifm-font-color-secondary: var(--gray-400);
+    --ifm-font-color-tertiary: var(--gray-500);
+    
+    --ifm-code-background: var(--gray-900);
+    --ifm-code-color: var(--gray-200);
+    
+    --border-color: var(--gray-800);
+    
+    --shadow-sm: 0 1px 2px 0 rgb(255 255 255 / 0.05);
+    --shadow-md: 0 1px 3px 0 rgb(255 255 255 / 0.1);
+    --shadow-lg: 0 4px 6px -1px rgb(255 255 255 / 0.05);
+    
+    --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.05);
+  }
+  
+  /* ============================================
+     GLOBAL RESETS - Clean Slate
+     ============================================ */
+  * {
+    border-color: var(--border-color);
+  }
+  
+  body {
+    font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* ============================================
+     NAVBAR - Floating Minimal
+     ============================================ */
+  .navbar {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: none;
+    padding: 0.75rem 0;
+  }
+  
+  [data-theme='dark'] .navbar {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  
+  .navbar__inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .navbar__brand {
+    margin-right: 2rem;
+  }
+  
+  .navbar__title {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
+    color: var(--ifm-font-color-base);
+  }
+  
+  .navbar__item {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ifm-font-color-secondary);
+    transition: color 0.15s ease;
+  }
+  
+  .navbar__link:hover {
+    color: var(--ifm-font-color-base);
+    text-decoration: none;
+  }
+  
+  .navbar__link--active {
+    color: var(--ifm-font-color-base);
+    font-weight: 500;
+  }
+  
+  /* Hide logo image for ultra-minimal */
+  .navbar__logo {
+    display: none;
+  }
+  
+  /* GitHub link - Minimal icon */
+  .header-github-link {
+    opacity: 0.6;
+    transition: opacity 0.15s ease;
+  }
+  
+  .header-github-link:hover {
+    opacity: 1;
+  }
+  
+  .header-github-link::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    display: flex;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23171717' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E") no-repeat;
+  }
+  
+  [data-theme='dark'] .header-github-link::before {
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23fafafa' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E") no-repeat;
+  }
+  
+  /* Color mode toggle - Minimal */
+  button[aria-label*="color mode"] {
+    border-radius: 0.375rem;
+    opacity: 0.6;
+    transition: opacity 0.15s ease;
+  }
+  
+  button[aria-label*="color mode"]:hover {
+    opacity: 1;
+    background: transparent;
+  }
+  
+  /* ============================================
+     SIDEBAR - Ultra Clean
+     ============================================ */
+  .theme-doc-sidebar-container {
+    border-right: 1px solid var(--border-color);
+    background: transparent;
+  }
+  
+  .menu {
+    padding: 2rem 1rem;
+  }
+  
+  .menu__list {
+    margin: 0;
+  }
+  
+  .menu__link {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--ifm-font-color-secondary);
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    transition: all 0.15s ease;
+  }
+  
+  .menu__link:hover {
+    background: var(--gray-100);
+    color: var(--ifm-font-color-base);
+    text-decoration: none;
+  }
+  
+  [data-theme='dark'] .menu__link:hover {
+    background: var(--gray-900);
+  }
+  
+  .menu__link--active {
+    background: var(--gray-100);
+    color: var(--ifm-font-color-base);
+    font-weight: 500;
+  }
+  
+  [data-theme='dark'] .menu__link--active {
+    background: var(--gray-900);
+  }
+  
+  .menu__list-item-collapsible:hover {
+    background: transparent;
+  }
+  
+  .menu__caret::before {
+    background: var(--ifm-menu-link-sublist-icon) 50% / 1.5rem 1.5rem;
+  }
+  
+  /* Category labels */
+  .menu__list-item--collapsed .menu__link--sublist::after,
+  .menu__list-item--collapsed .menu__caret::before {
+    opacity: 0.5;
+  }
+  
+  /* ============================================
+     MAIN CONTENT - Spacious & Readable
+     ============================================ */
+  .main-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  article {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+  
+  /* ============================================
+     TYPOGRAPHY - Refined Hierarchy
+     ============================================ */
+  .markdown {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--ifm-font-color-base);
+  }
+  
+  .markdown > h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--ifm-font-color-base);
+  }
+  
+  .markdown > h2 {
+    font-size: 1.875rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .markdown > h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .markdown > h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .markdown p {
+    margin-bottom: 1.5rem;
+    color: var(--ifm-font-color-secondary);
+  }
+  
+  .markdown a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+  
+  .markdown a:hover {
+    border-bottom-color: var(--accent);
+  }
+  
+  /* Lists */
+  .markdown ul,
+  .markdown ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  
+  .markdown li {
+    margin-bottom: 0.5rem;
+    color: var(--ifm-font-color-secondary);
+  }
+  
+  /* ============================================
+     CODE - Minimal & Clean
+     ============================================ */
+  code {
+    font-family: var(--ifm-font-family-monospace);
+    font-size: 0.875em;
+    background: var(--ifm-code-background);
+    color: var(--ifm-code-color);
+    border-radius: 0.25rem;
+    padding: 0.15em 0.4em;
+    border: 1px solid var(--border-color);
+  }
+  
+  pre {
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+    background: var(--ifm-code-background);
+    margin-bottom: 1.5rem;
+  }
+  
+  pre code {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+  
+  /* ============================================
+     TABLES - Minimal Grid
+     ============================================ */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+    font-size: 0.875rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  
+  thead {
+    background: var(--gray-50);
+  }
+  
+  [data-theme='dark'] thead {
+    background: var(--gray-900);
+  }
+  
+  th {
+    font-weight: 500;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    color: var(--ifm-font-color-base);
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  td {
+    padding: 0.75rem 1rem;
+    color: var(--ifm-font-color-secondary);
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  tr:last-child td {
+    border-bottom: none;
+  }
+  
+  /* ============================================
+     ADMONITIONS - Subtle Callouts
+     ============================================ */
+  .admonition {
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    background: var(--gray-50);
+    border-left-width: 3px;
+  }
+  
+  [data-theme='dark'] .admonition {
+    background: var(--gray-900);
+  }
+  
+  .admonition-heading {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 0.9375rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .admonition-content {
+    font-size: 0.9375rem;
+    color: var(--ifm-font-color-secondary);
+  }
+  
+  .admonition-note {
+    border-left-color: var(--accent);
+  }
+  
+  .admonition-tip {
+    border-left-color: var(--success);
+  }
+  
+  .admonition-warning {
+    border-left-color: var(--warning);
+  }
+  
+  .admonition-danger {
+    border-left-color: var(--danger);
+  }
+  
+  /* ============================================
+     BUTTONS - Minimal & Focused
+     ============================================ */
+  .button {
+    font-weight: 500;
+    font-size: 0.875rem;
+    border-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    transition: all 0.15s ease;
+  }
+  
+  .button--primary {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+  
+  .button--primary:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+    color: white;
+  }
+  
+  .button--secondary {
+    background: transparent;
+    color: var(--ifm-font-color-base);
+    border-color: var(--border-color);
+  }
+  
+  .button--secondary:hover {
+    background: var(--gray-100);
+    border-color: var(--gray-300);
+  }
+  
+  [data-theme='dark'] .button--secondary:hover {
+    background: var(--gray-900);
+  }
+  
+  /* ============================================
+     FOOTER - Minimal
+     ============================================ */
+  .footer {
+    background: transparent;
+    border-top: 1px solid var(--border-color);
+    padding: 3rem 0;
+    margin-top: 4rem;
+  }
+  
+  .footer__title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ifm-font-color-base);
+    margin-bottom: 1rem;
+  }
+  
+  .footer__item {
+    font-size: 0.875rem;
+    color: var(--ifm-font-color-secondary);
+    transition: color 0.15s ease;
+  }
+  
+  .footer__link-item:hover {
+    color: var(--ifm-font-color-base);
+    text-decoration: none;
+  }
+  
+  .footer__copyright {
+    font-size: 0.875rem;
+    color: var(--ifm-font-color-tertiary);
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  /* ============================================
+     ANNOUNCEMENT BAR - Minimal
+     ============================================ */
+  div[class^='announcementBar'] {
+    background: var(--accent);
+    border-bottom: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+  }
+  
+  div[class^='announcementBar'] a {
+    color: white;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  
+  /* ============================================
+     BREADCRUMBS - Minimal
+     ============================================ */
+  .breadcrumbs {
+    font-size: 0.8125rem;
+    margin-bottom: 2rem;
+  }
+  
+  .breadcrumbs__link {
+    color: var(--ifm-font-color-secondary);
+    transition: color 0.15s ease;
+  }
+  
+  .breadcrumbs__link:hover {
+    color: var(--ifm-font-color-base);
+    text-decoration: none;
+  }
+  
+  /* ============================================
+     PAGINATION - Clean
+     ============================================ */
+  .pagination-nav {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .pagination-nav__link {
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    transition: all 0.15s ease;
+  }
+  
+  .pagination-nav__link:hover {
+    border-color: var(--gray-300);
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .pagination-nav__label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--ifm-font-color-secondary);
+    margin-bottom: 0.25rem;
+  }
+  
+  .pagination-nav__sublabel {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--ifm-font-color-base);
+  }
+  
+  /* ============================================
+     TOC (Table of Contents) - Minimal
+     ============================================ */
+  .table-of-contents {
+    font-size: 0.8125rem;
+  }
+  
+  .table-of-contents__link {
+    color: var(--ifm-font-color-secondary);
+    transition: color 0.15s ease;
+  }
+  
+  .table-of-contents__link:hover,
+  .table-of-contents__link--active {
+    color: var(--ifm-font-color-base);
+    text-decoration: none;
+  }
+  
+  .table-of-contents__link--active {
+    font-weight: 500;
+    border-left: 2px solid var(--accent);
+    padding-left: 0.75rem;
+    margin-left: -0.75rem;
+  }
+  
+  /* ============================================
+     SEARCH - Clean Input
+     ============================================ */
+  .navbar__search-input {
+    background: var(--gray-100);
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    transition: all 0.15s ease;
+  }
+  
+  [data-theme='dark'] .navbar__search-input {
+    background: var(--gray-900);
+  }
+  
+  .navbar__search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
+  }
+  
+  /* ============================================
+     RESPONSIVE - Mobile Optimization
+     ============================================ */
+  @media (max-width: 996px) {
+    article {
+      padding: 2rem 1.5rem;
+    }
+    
+    .markdown > h1 {
+      font-size: 2rem;
+    }
+    
+    .markdown > h2 {
+      font-size: 1.5rem;
+    }
+  }
+  
+  /* ============================================
+     UTILITY - Smooth Scrolling
+     ============================================ */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Focus visible for accessibility */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
