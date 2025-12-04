@@ -1,0 +1,225 @@
+direction: right
+
+title: |md
+  # Arc Flash Studio - System Architecture
+  IEEE 1584-2018 Compliant Web Application
+| {
+  near: top-center
+  shape: text
+  style: {
+    font-size: 24
+    bold: true
+  }
+}
+
+# User Layer
+user: {
+  shape: person
+  label: Electrical Engineer
+  style.fill: "#E0F2FE"
+}
+
+# Presentation Layer
+presentation: Frontend Application {
+  style.fill: "#DBEAFE"
+  
+  ui: User Interface {
+    shape: rectangle
+    style.fill: "#93C5FD"
+    
+    components: |md
+      - Equipment forms
+      - Network builder
+      - Results dashboard
+      - Report viewer
+    |
+  }
+  
+  state: State Management {
+    shape: rectangle
+    style.fill: "#93C5FD"
+    
+    features: |md
+      - Project data
+      - Equipment library
+      - Calculation cache
+    |
+  }
+  
+  api_client: API Client {
+    shape: rectangle
+    style.fill: "#93C5FD"
+    
+    responsibilities: |md
+      - HTTP requests
+      - Error handling
+      - Data serialization
+    |
+  }
+}
+
+# Application Layer
+application: Backend API {
+  style.fill: "#FEF3C7"
+  
+  routes: API Routes {
+    shape: rectangle
+    style.fill: "#FDE68A"
+    
+    endpoints: |md
+      POST /calculate
+      GET /projects
+      POST /projects
+      GET /equipment-library
+    |
+  }
+  
+  validation: Request Validation {
+    shape: rectangle
+    style.fill: "#FDE68A"
+    
+    checks: |md
+      - Input ranges
+      - Required fields
+      - Business rules
+    |
+  }
+}
+
+# Business Logic Layer
+business: Calculation Engine {
+  style.fill: "#DCFCE7"
+  
+  ieee: IEEE 1584-2018 Module {
+    shape: rectangle
+    style.fill: "#86EFAC"
+    
+    calculations: |md
+      - Arcing current
+      - Incident energy
+      - Arc flash boundary
+      - Correction factors
+    |
+  }
+  
+  power_flow: Power System Analysis {
+    shape: rectangle
+    style.fill: "#86EFAC"
+    
+    using: |md
+      PandaPower library
+      - Short circuit
+      - Load flow
+      - Fault analysis
+    |
+  }
+  
+  validation_logic: Result Validation {
+    shape: rectangle
+    style.fill: "#86EFAC"
+    
+    checks: |md
+      - Physical constraints
+      - Standard compliance
+      - Convergence verification
+    |
+  }
+}
+
+# Data Layer
+data: Data Persistence {
+  style.fill: "#E9D5FF"
+  
+  db: Database {
+    shape: cylinder
+    style.fill: "#C084FC"
+    
+    stores: |md
+      - Projects
+      - Equipment
+      - Calculations
+      - User preferences
+    |
+  }
+  
+  files: File Storage {
+    shape: cylinder
+    style.fill: "#C084FC"
+    
+    stores: |md
+      - Reports (PDF)
+      - Diagrams (SVG)
+      - Exports (JSON/CSV)
+    |
+  }
+}
+
+# External Systems
+external: External Services {
+  style.fill: "#FED7AA"
+  
+  pdf: PDF Generator {
+    shape: rectangle
+    style.fill: "#FDBA74"
+  }
+  
+  standards: Standards Database {
+    shape: cylinder
+    style.fill: "#FDBA74"
+    
+    contains: |md
+      - Equipment tables
+      - PPE categories
+      - NEC references
+    |
+  }
+}
+
+# Connections - User Flow
+user -> presentation.ui: Interacts via browser
+presentation.ui -> presentation.state: Updates application state
+presentation.state -> presentation.api_client: Triggers API calls
+
+# Connections - API Flow
+presentation.api_client -> application.routes: HTTP/REST (JSON)
+application.routes -> application.validation: Validates request
+application.validation -> business.ieee: Delegates calculation
+
+# Connections - Business Logic
+business.ieee -> business.power_flow: Requests fault currents
+business.power_flow -> business.ieee: Returns electrical parameters
+business.ieee -> business.validation_logic: Validates results
+business.validation_logic -> application.routes: Returns response
+
+# Connections - Data Persistence
+application.routes -> data.db: Save/retrieve projects
+business.ieee -> external.standards: Lookup correction factors
+application.routes -> external.pdf: Generate reports
+application.routes -> data.files: Store generated files
+
+# Return path
+application.routes -> presentation.api_client: JSON response {
+  style.stroke-dash: 3
+}
+presentation.api_client -> presentation.state: Updates state {
+  style.stroke-dash: 3
+}
+presentation.state -> presentation.ui: Re-renders UI {
+  style.stroke-dash: 3
+}
+
+# Legend
+legend: |md
+  ## Legend
+  - **Blue**: Frontend (React + Vite)
+  - **Yellow**: API Layer (FastAPI)
+  - **Green**: Business Logic (Python)
+  - **Purple**: Data Storage
+  - **Orange**: External Services
+| {
+  near: bottom-right
+  shape: text
+  style: {
+    font-size: 14
+  }
+}
